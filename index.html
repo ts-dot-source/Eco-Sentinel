@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>EcoSentinel — India's Early Warning System for Ecosystem Drift</title>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Rajdhani:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -80,10 +81,13 @@
       <div id="indiaMap" class="india-map"></div>
       <div class="map-side">
         <!-- NDVI chart -->
-        <div class="side-card">
+        <div class="side-card ndvi-card">
           <div class="side-card-title">NDVI TREND — <span id="selectedDistrict">SUNDARBANS DISTRICT</span></div>
-          <div class="side-card-sub">12-month vegetation index trajectory vs baseline</div>
-          <canvas id="chartNdviMain" height="130"></canvas>
+          <div class="side-card-sub">52-month vegetation index trajectory vs baseline</div>
+          <div style="position: relative;">
+            <canvas id="chartNdviMain" height="200"></canvas>
+            <div class="threshold-label">Collapse Threshold</div>
+          </div>
         </div>
         <!-- National risk distribution -->
         <div class="side-card">
@@ -195,13 +199,13 @@
 
       <!-- Unsupervised clustering -->
       <div class="clustering-panel">
-        <div class="card-label">UNSUPERVISED ANOMALY CLUSTERING</div>
-        <div class="cluster-sub">K-Means (4 clusters) — Feature space: Nightlight Volatility × NDVI Drift × Moisture Deficit</div>
+        <div class="card-label">UNSUPERVISED ANOMALY DETECTION</div>
+        <div class="cluster-sub">DBSCAN Clustering — Feature Space: Nightlight Volatility × NDVI Drift × Moisture Deficit</div>
         <div class="cluster-legend">
-          <span class="cl-item immediate">● Immediate</span>
-          <span class="cl-item collapse">● Urban Pressure</span>
-          <span class="cl-item drift">● Vegetation Stress</span>
-          <span class="cl-item low">● Stable Ecosystem</span>
+          <span class="cl-item immediate">● Critical Anomaly</span>
+          <span class="cl-item collapse">● Urban Expansion</span>
+          <span class="cl-item drift">● Vegetation Decline</span>
+          <span class="cl-item low">● Ecosystem Stability</span>
         </div>
         <canvas id="clusterChart" height="160"></canvas>
       </div>
